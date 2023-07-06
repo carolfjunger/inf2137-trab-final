@@ -9,18 +9,33 @@ import numpy as np
 class GridSearchProcess:
   
   def __get_knn_model_params(self):
+    """get knn models params to run grid search
+
+    Returns:
+        dict: knn models params
+    """
     k = [1,3,5,7,9,11,13,15,17,19,21]
     distancias = ["euclidean", "manhattan", "minkowski"]
     param_grid = dict(n_neighbors=k, metric=distancias)
     return param_grid
   
   def __get_decision_tree_params(self):
+    """get decision tree models params to run grid search
+
+    Returns:
+        dict: decision tree models params
+    """
     criterion = ['gini','entropy']
     max_depth = [3,4,5,6,7,8,9,10,11,12,15,20,30,40,50,70,90,120,150]
     param_grid = {'criterion': criterion,'max_depth': max_depth}
     return param_grid
   
   def __get_SVM_params(self):
+    """get svm models params to run grid search
+
+    Returns:
+        dict: svm models params
+    """
     C = [0.1, 0.3, 0.5, 0.7, 0.9, 1.0, 1.3, 1.5, 1.7, 2.0]
     kernel = ['linear', 'poly', 'rbf', 'sigmoid']
     param_grid = {
@@ -30,9 +45,25 @@ class GridSearchProcess:
     return param_grid
   
   def __get_navie_bayes_params(self):
+    """get naive bayes models params to run grid search
+
+    Returns:
+        dict: naive bayes models params
+    """
     return {'var_smoothing': np.logspace(0,-9, num=20)}
   
   def run(self, X_train, y_train, scoring, kfold):
+    """run grid search proccess 
+
+    Args:
+        X_train (list): list of train atributes
+        y_train (list): list of train results
+        scoring (string): scoring value
+        kfold (StratifiedKFold): Stratified KFold
+
+    Returns:
+       void
+    """
     # Processo de GridSearch 
 
     models = []
